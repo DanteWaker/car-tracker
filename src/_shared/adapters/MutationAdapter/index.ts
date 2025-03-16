@@ -27,18 +27,13 @@ export function useMutation<
 	const result = useReactMutation<TData, TError, TVariables>({
 		mutationFn,
 		onError: (error, variables) => {
-			// Generic error handling
-			console.error("Mutation error:", error);
-
-			// Display error toast with appropriate message
 			const errorMessage =
 				error instanceof Error
 					? error.message
-					: "Ocorreu um erro ao processar a solicitação";
+					: "An error occurred while processing the request";
 
 			toast.error(errorMessage);
 
-			// Call custom error handler if provided
 			options?.onError?.(error, variables);
 		},
 		onSuccess: options?.onSuccess,
@@ -59,5 +54,4 @@ export function useMutation<
 	};
 }
 
-// Re-export types from contracts
 export * from "./contracts";
