@@ -17,19 +17,15 @@ export default function middleware(request: NextRequest) {
 		return NextResponse.next();
 	}
 
-	if (!authToken && !publicRoute) {
-		const redirectUrl = request.nextUrl.clone();
-		redirectUrl.pathname = REDIRECT_WHEN_UNAUTHENTICATED;
-		return NextResponse.redirect(redirectUrl);
-	}
+	// if (!authToken && !publicRoute) {
+	// 	const redirectUrl = request.nextUrl.clone();
+	// 	redirectUrl.pathname = REDIRECT_WHEN_UNAUTHENTICATED;
+	// 	return NextResponse.redirect(redirectUrl);
+	// }
 
-	if (authToken && publicRoute && publicRoute.whenAuthenticated === "redirect") {
-		const redirectUrl = request.nextUrl.clone();
-		redirectUrl.pathname = "/";
-		return NextResponse.redirect(redirectUrl);
-	}
-
-	if (authToken && !publicRoute) {
-		return NextResponse.next();
-	}
+	// if (authToken && publicRoute && publicRoute.whenAuthenticated === "redirect") {
+	// 	const redirectUrl = request.nextUrl.clone();
+	// 	redirectUrl.pathname = "/";
+	// 	return NextResponse.redirect(redirectUrl);
+	// }
 }
