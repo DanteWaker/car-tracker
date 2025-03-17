@@ -16,15 +16,11 @@ export function useLoginModel() {
 				callbackUrl: "/",
 			});
 
-			console.log("Resultado do login:", result);
-
 			if (result?.error) {
-				console.error("Erro na autenticação:", result.error);
 				throw new Error(result.error);
 			}
 		} catch (error) {
-			console.error("Falha ao fazer login:", error);
-			throw error;
+			throw new Error(error as string);
 		}
 	};
 
