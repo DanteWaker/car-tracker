@@ -3,45 +3,11 @@
 import { Button } from "@/_shared/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/_shared/components/ui/form";
 import { Input } from "@/_shared/components/ui/input";
-import { useToast } from "@/_shared/hooks/use-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useLoginViewModel } from "../view-models/login-view-model";
+import { useLoginForm } from "./hook";
 
 export function LoginForm() {
-	const { loginSchema, handleLogin } = useLoginViewModel();
-	const { toast } = useToast();
-	const [showPassword, setShowPassword] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
-
-	const form = useForm({
-		resolver: zodResolver(loginSchema),
-		defaultValues: {
-			email: "",
-			password: "",
-		},
-	});
-
-	const onSubmit = async (data: { email: string; password: string }) => {
-		try {
-			setIsLoading(true);
-			await handleLogin(data);
-			toast({
-				title: "Login successful",
-				description: "You have been logged in successfully.",
-			});
-		} catch (error) {
-			toast({
-				title: "Login failed",
-				description: "Invalid email or password.",
-				variant: "destructive",
-			});
-		} finally {
-			setIsLoading(false);
-		}
-	};
+	const { form, onSubmit, showPassword, setShowPassword, isLoading } = useLoginForm();
 
 	return (
 		<Form {...form}>

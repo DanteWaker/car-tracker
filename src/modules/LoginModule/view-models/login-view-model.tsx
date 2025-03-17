@@ -21,7 +21,6 @@ export function useLoginViewModel() {
 	const handleLogin = async (data: { email: string; password: string }) => {
 		try {
 			setError(null);
-			// This would call the actual login function from the model
 			await login(data.email, data.password);
 			return true;
 		} catch (err) {
