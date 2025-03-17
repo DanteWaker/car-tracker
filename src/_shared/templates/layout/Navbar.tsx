@@ -45,7 +45,7 @@ export function Navbar({ routes = defaultRoutes }: NavbarProps) {
 				<div className="p-4 flex items-center justify-between border-b">
 					{isDesktopMenuOpen && (
 						<Link href="/dashboard" className="flex-shrink-0 flex items-center">
-							<span className="text-xl font-bold">Energy</span>
+							<span className="text-xl font-bold">Car Tracker</span>
 						</Link>
 					)}
 					<Button variant="ghost" size="icon" onClick={toggleDesktopMenu}>
@@ -80,7 +80,7 @@ export function Navbar({ routes = defaultRoutes }: NavbarProps) {
 					<div className="px-4 py-3">
 						<div className="flex justify-between items-center">
 							<Link href="/dashboard" className="flex-shrink-0 flex items-center">
-								<span className="text-xl font-bold">Energy Management</span>
+								<span className="text-xl font-bold">Car Tracker Management</span>
 							</Link>
 
 							{/* Menu hambúrguer para mobile */}
