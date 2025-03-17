@@ -10,7 +10,7 @@ const routes: Route[] = [
 	},
 	{
 		name: "Veículos",
-		path: "/veiculos",
+		path: "/vehicles",
 		icon: <IconCar className="h-5 w-5" />,
 	},
 	{
