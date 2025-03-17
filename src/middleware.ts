@@ -30,7 +30,6 @@ export default async function middleware(request: NextRequest) {
 
 	if (authToken?.value) {
 		const decoded = JSON.parse(Buffer.from(authToken.value.split(".")[1], "base64").toString());
-		console.log(decoded);
 		const isExpired = decoded.exp < Date.now() / 1000;
 		if (isExpired) {
 			(await cookies()).delete("accessToken");
