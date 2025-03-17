@@ -28,15 +28,6 @@ export default async function middleware(request: NextRequest) {
 		return NextResponse.redirect(redirectUrl);
 	}
 
-	// if (authToken?.value) {
-	// 	const decoded = JSON.parse(Buffer.from(authToken.value.split(".")[1], "base64").toString());
-	// 	const isExpired = decoded.exp < Date.now() / 1000;
-	// 	if (isExpired) {
-	// 		(await cookies()).delete("accessToken");
-	// 		return NextResponse.redirect(new URL(REDIRECT_WHEN_UNAUTHENTICATED, request.url));
-	// 	}
-	// }
-
 	return NextResponse.next();
 }
 

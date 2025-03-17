@@ -1,20 +1,24 @@
+import type { Route } from "@/_shared/templates/layout/Navbar";
 import { SidebarLayout } from "@/_shared/templates/layout/SidebarLayout";
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
-import { Providers } from "../providers";
+import { IconCar, IconDashboard, IconRoute } from "@tabler/icons-react";
 
-const poppins = Poppins({
-	subsets: ["latin"],
-	weight: ["400", "500", "600", "700", "800"],
-	variable: "--font-public-sans",
-});
-
-export const metadata: Metadata = {
-	title: "Car Tracker",
-	description: "Car Tracker",
-};
-
-export const dynamic = "force-dynamic";
+const routes: Route[] = [
+	{
+		name: "Dashboard",
+		path: "/",
+		icon: <IconDashboard className="h-5 w-5" />,
+	},
+	{
+		name: "Veículos",
+		path: "/veiculos",
+		icon: <IconCar className="h-5 w-5" />,
+	},
+	{
+		name: "Rastreamento de veículos",
+		path: "/rastreamento",
+		icon: <IconRoute className="h-5 w-5" />,
+	},
+];
 
 export default async function PrivateLayout({
 	children,
@@ -22,12 +26,8 @@ export default async function PrivateLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
-			<body className={`${poppins.className} antialiased`}>
-				<SidebarLayout>
-					<Providers>{children}</Providers>
-				</SidebarLayout>
-			</body>
-		</html>
+		<SidebarLayout routes={routes}>
+			<div className="p-6">{children}</div>
+		</SidebarLayout>
 	);
 }

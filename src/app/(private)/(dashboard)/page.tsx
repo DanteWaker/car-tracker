@@ -1,3 +1,5 @@
-export default function DashboardPage() {
-	return <div>Dashboard</div>;
+import { DashboardModule } from "@/modules/DashboardModule";
+
+export default async function DashboardPage() {
+	return <DashboardModule />;
 }

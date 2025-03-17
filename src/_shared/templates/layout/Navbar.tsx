@@ -6,17 +6,27 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/_s
 import { IconDashboard, IconLogout, IconMenu2 } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 
-const routes = [
+export interface Route {
+	name: string;
+	path: string;
+	icon: ReactNode;
+}
+
+const defaultRoutes: Route[] = [
 	{
 		name: "Dashboard",
-		path: "/dashboard",
+		path: "/",
 		icon: <IconDashboard className="h-5 w-5" />,
 	},
 ];
 
-export function Navbar() {
+interface NavbarProps {
+	routes?: Route[];
+}
+
+export function Navbar({ routes = defaultRoutes }: NavbarProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(true);
 	const pathname = usePathname();
