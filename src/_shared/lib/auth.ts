@@ -23,7 +23,6 @@ export async function verifyAndRefreshTokens() {
 		});
 		if (response) {
 			cookieStore.set("accessToken", response.access);
-			console.log("dentro do if");
 		}
 	}
 

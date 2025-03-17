@@ -1,5 +1,5 @@
 import { DashboardModule } from "@/modules/DashboardModule";
 
-export default async function DashboardPage() {
+export default function DashboardPage() {
 	return <DashboardModule />;
 }

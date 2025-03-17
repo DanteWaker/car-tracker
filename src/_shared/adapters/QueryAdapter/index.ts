@@ -19,6 +19,7 @@ export function useQuery<TData = unknown, TError = Error>(
 		queryKey: Array.isArray(key) ? key : [key],
 		queryFn,
 		refetchOnWindowFocus: false,
+		refetchIntervalInBackground: false,
 		...(options as Omit<InternalQueryOptions<TData, TError>, "refetchOnWindowFocus">),
 	});
 

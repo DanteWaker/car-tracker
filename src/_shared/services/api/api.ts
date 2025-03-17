@@ -1,8 +1,7 @@
 import axios, { type AxiosError } from "axios";
-import { cookies } from "next/headers";
 
 const apiInstance = axios.create({
-	baseURL: "/api",
+	// baseURL: "",
 	timeout: 10000,
 	headers: {
 		"Content-Type": "application/json",
