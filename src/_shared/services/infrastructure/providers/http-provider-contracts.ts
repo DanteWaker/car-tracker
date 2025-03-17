@@ -10,6 +10,7 @@ export type BaseRequest<TBody = unknown> = {
 	endpoint: string;
 	params?: Record<string, string>;
 	body?: TBody;
+	headers?: Record<string, string>;
 };
 
 export interface PaginationInfo {

@@ -16,6 +16,7 @@ class HttpProvider implements IHttpProvider {
 		return await this.httpClient.sendRequest<TResponse, unknown>({
 			endpoint: request.endpoint,
 			method: HttpMethod.GET,
+			headers: request.headers,
 			params: request.params,
 		});
 	};
@@ -25,6 +26,7 @@ class HttpProvider implements IHttpProvider {
 			endpoint: request.endpoint,
 			method: HttpMethod.POST,
 			body: request.body,
+			headers: request.headers,
 			params: request.params,
 		});
 	};
@@ -34,6 +36,7 @@ class HttpProvider implements IHttpProvider {
 			endpoint: request.endpoint,
 			method: HttpMethod.DELETE,
 			body: request.body,
+			headers: request.headers,
 		});
 	};
 
@@ -43,6 +46,7 @@ class HttpProvider implements IHttpProvider {
 			method: HttpMethod.PUT,
 			body: request.body,
 			params: request.params,
+			headers: request.headers,
 		});
 	};
 
@@ -52,6 +56,7 @@ class HttpProvider implements IHttpProvider {
 			method: HttpMethod.PATCH,
 			body: request.body,
 			params: request.params,
+			headers: request.headers,
 		});
 	};
 }
