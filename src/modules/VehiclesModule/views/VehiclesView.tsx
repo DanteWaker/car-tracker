@@ -4,11 +4,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/_shared/components/ui/ale
 import { Badge } from "@/_shared/components/ui/badge";
 import { Button } from "@/_shared/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/_shared/components/ui/card";
-import { Input } from "@/_shared/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/_shared/components/ui/select";
 import { Separator } from "@/_shared/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/_shared/components/ui/table";
-import { IconCar, IconRefresh, IconSearch } from "@tabler/icons-react";
+import { IconRefresh } from "@tabler/icons-react";
 import { useVehiclesViewModel } from "../viewmodels/vehicles-viewmodel";
 
 export function VehiclesView() {
