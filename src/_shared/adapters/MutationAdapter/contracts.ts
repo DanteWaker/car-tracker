@@ -5,9 +5,7 @@ import type { UseMutationResult } from "@tanstack/react-query";
  * @template TData Type of data returned by the mutation.
  * @template TVariables Type of variables passed to the mutation.
  */
-export type MutationFn<TData, TVariables> = (
-	variables: TVariables,
-) => Promise<TData>;
+export type MutationFn<TData, TVariables> = (variables: TVariables) => Promise<TData>;
 
 /**
  * Configuration options for a mutation.
@@ -18,11 +16,7 @@ export type MutationFn<TData, TVariables> = (
 export interface MutationOptions<TData, TVariables, TError> {
 	onSuccess?: (data: TData, variables: TVariables) => void;
 	onError?: (error: TError, variables: TVariables) => void;
-	onSettled?: (
-		data: TData | undefined,
-		error: TError | null,
-		variables: TVariables,
-	) => void;
+	onSettled?: (data: TData | undefined, error: TError | null, variables: TVariables) => void;
 	retry?: boolean | number;
 	retryDelay?: number;
 }
@@ -61,5 +55,4 @@ export type InternalMutationOptions<TData, TVariables, TError> = Omit<
  * @template TVariables Type of variables passed to the mutation.
  * @template TError Type of error that may occur during the mutation.
  */
-export type InternalMutationResult<TData, TVariables, TError> =
-	UseMutationResult<TData, TError, TVariables, unknown>;
+export type InternalMutationResult<TData, TVariables, TError> = UseMutationResult<TData, TError, TVariables, unknown>;

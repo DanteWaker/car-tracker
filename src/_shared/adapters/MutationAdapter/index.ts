@@ -1,12 +1,7 @@
 import { useMutation as useReactMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import type {
-	MutationFn,
-	MutationOptions,
-	MutationResult,
-	InternalMutationResult,
-} from "./contracts";
+import type { InternalMutationResult, MutationFn, MutationOptions, MutationResult } from "./contracts";
 
 /**
  * A wrapper around React Query's useMutation hook to decouple the application from the library
@@ -16,21 +11,14 @@ import type {
  * @param options - Additional options for the mutation
  * @returns A simplified mutation result object
  */
-export function useMutation<
-	TData = unknown,
-	TVariables = unknown,
-	TError = Error,
->(
+export function useMutation<TData = unknown, TVariables = unknown, TError = Error>(
 	mutationFn: MutationFn<TData, TVariables>,
 	options?: MutationOptions<TData, TVariables, TError>,
 ): MutationResult<TData, TVariables, TError> {
 	const result = useReactMutation<TData, TError, TVariables>({
 		mutationFn,
 		onError: (error, variables) => {
-			const errorMessage =
-				error instanceof Error
-					? error.message
-					: "An error occurred while processing the request";
+			const errorMessage = error instanceof Error ? error.message : "An error occurred while processing the request";
 
 			toast.error(errorMessage);
 

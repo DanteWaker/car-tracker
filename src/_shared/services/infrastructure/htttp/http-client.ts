@@ -8,9 +8,7 @@ export class HttpClient implements IHttpClient {
 		return new HttpClient(api);
 	}
 
-	async sendRequest<TResponse, TBody>(
-		props: IHttpRequest<TBody>,
-	): Promise<TResponse> {
+	async sendRequest<TResponse, TBody>(props: IHttpRequest<TBody>): Promise<TResponse> {
 		const { endpoint, method, body, headers, params } = props;
 
 		try {

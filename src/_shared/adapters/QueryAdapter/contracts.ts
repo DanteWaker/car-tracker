@@ -1,4 +1,4 @@
-import type { UseQueryResult, UseQueryOptions } from "@tanstack/react-query";
+import type { UseQueryOptions, UseQueryResult } from "@tanstack/react-query";
 
 /**
  * Represents the query key which can be a string or a readonly array of unknown values.
@@ -51,7 +51,4 @@ export interface QueryResult<TData, TError> {
  * @template TData Type of data returned by the query.
  * @template TError Type of error that may occur during the query.
  */
-export type InternalQueryOptions<TData, TError> = Omit<
-	UseQueryOptions<TData, TError>,
-	"queryKey" | "queryFn"
->;
+export type InternalQueryOptions<TData, TError> = Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">;

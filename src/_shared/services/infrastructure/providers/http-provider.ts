@@ -1,9 +1,9 @@
 import type { AxiosInstance } from "axios";
 
-import type { BaseRequest, IHttpProvider } from "./http-provider-contracts";
+import apiInstance from "../../api/api";
 import { HttpMethod, type IHttpClient } from "../contracts/http-contracts";
 import { HttpClient } from "../htttp/http-client";
-import apiInstance from "../../api/api";
+import type { BaseRequest, IHttpProvider } from "./http-provider-contracts";
 
 class HttpProvider implements IHttpProvider {
 	private httpClient: IHttpClient;
@@ -20,9 +20,7 @@ class HttpProvider implements IHttpProvider {
 		});
 	};
 
-	public post = async <TResponse, TBody>(
-		request: BaseRequest<TBody>,
-	): Promise<TResponse> => {
+	public post = async <TResponse, TBody>(request: BaseRequest<TBody>): Promise<TResponse> => {
 		return await this.httpClient.sendRequest<TResponse, TBody>({
 			endpoint: request.endpoint,
 			method: HttpMethod.POST,
@@ -39,9 +37,7 @@ class HttpProvider implements IHttpProvider {
 		});
 	};
 
-	public put = async <TResponse, TBody>(
-		request: BaseRequest<TBody>,
-	): Promise<TResponse> => {
+	public put = async <TResponse, TBody>(request: BaseRequest<TBody>): Promise<TResponse> => {
 		return await this.httpClient.sendRequest<TResponse, TBody>({
 			endpoint: request.endpoint,
 			method: HttpMethod.PUT,
@@ -50,9 +46,7 @@ class HttpProvider implements IHttpProvider {
 		});
 	};
 
-	public patch = async <TResponse, TBody>(
-		request: BaseRequest<TBody>,
-	): Promise<TResponse> => {
+	public patch = async <TResponse, TBody>(request: BaseRequest<TBody>): Promise<TResponse> => {
 		return await this.httpClient.sendRequest<TResponse, TBody>({
 			endpoint: request.endpoint,
 			method: HttpMethod.PATCH,

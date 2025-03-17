@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { Providers } from "./providers";
-import "./globals.css";
+import "../../public/globals.css";
 
 const poppins = Poppins({
 	subsets: ["latin"],

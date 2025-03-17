@@ -1,12 +1,6 @@
 import { useQuery as useReactQuery } from "@tanstack/react-query";
 
-import type {
-	QueryKey,
-	QueryFn,
-	QueryOptions,
-	QueryResult,
-	InternalQueryOptions,
-} from "./contracts";
+import type { InternalQueryOptions, QueryFn, QueryKey, QueryOptions, QueryResult } from "./contracts";
 
 /**
  * A wrapper around React Query's useQuery hook to decouple the application from the library

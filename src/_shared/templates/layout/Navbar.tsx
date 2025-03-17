@@ -1,19 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { Avatar, AvatarFallback } from "@/_shared/components/ui/avatar";
+import { Button } from "@/_shared/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/_shared/components/ui/sheet";
+import { useAuthStore } from "@/_shared/stores/auth.store";
+import { IconDashboard, IconLogout, IconMenu2 } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useAuthStore } from "@/_shared/stores/auth.store";
-import { Button } from "@/_shared/components/ui/button";
-import { Avatar, AvatarFallback } from "@/_shared/components/ui/avatar";
-import {
-	Sheet,
-	SheetContent,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
-} from "@/_shared/components/ui/sheet";
-import { IconMenu2, IconDashboard, IconLogout } from "@tabler/icons-react";
+import { useState } from "react";
 
 const routes = [
 	{
@@ -85,9 +79,7 @@ export function Navbar() {
 						>
 							<div className="flex items-center">
 								{route.icon}
-								{isDesktopMenuOpen && (
-									<span className="ml-3 text-sm font-medium">{route.name}</span>
-								)}
+								{isDesktopMenuOpen && <span className="ml-3 text-sm font-medium">{route.name}</span>}
 							</div>
 						</Link>
 					))}
@@ -100,12 +92,8 @@ export function Navbar() {
 								<AvatarFallback>{getUserInitials()}</AvatarFallback>
 							</Avatar>
 							<div className="flex-1 min-w-0">
-								<div className="text-sm font-medium truncate">
-									{getDisplayName()}
-								</div>
-								<div className="text-xs text-muted-foreground truncate">
-									{user?.email}
-								</div>
+								<div className="text-sm font-medium truncate">{getDisplayName()}</div>
+								<div className="text-xs text-muted-foreground truncate">{user?.email}</div>
 							</div>
 							<Button variant="ghost" size="icon" onClick={handleSignOut}>
 								<IconLogout className="h-5 w-5" />
@@ -130,10 +118,7 @@ export function Navbar() {
 				<nav className="md:hidden bg-background border-b sticky top-0 z-40">
 					<div className="px-4 py-3">
 						<div className="flex justify-between items-center">
-							<Link
-								href="/dashboard"
-								className="flex-shrink-0 flex items-center"
-							>
+							<Link href="/dashboard" className="flex-shrink-0 flex items-center">
 								<span className="text-xl font-bold">Energy Management</span>
 							</Link>
 
@@ -157,9 +142,7 @@ export function Navbar() {
 										</Avatar>
 										<div>
 											<div className="font-medium">{getDisplayName()}</div>
-											<div className="text-sm text-muted-foreground truncate max-w-[180px]">
-												{user?.email}
-											</div>
+											<div className="text-sm text-muted-foreground truncate max-w-[180px]">{user?.email}</div>
 										</div>
 									</div>
 
@@ -184,11 +167,7 @@ export function Navbar() {
 
 									{/* Botão de sair para mobile */}
 									<div className="mt-auto pt-6 border-t">
-										<Button
-											variant="outline"
-											className="w-full"
-											onClick={handleSignOut}
-										>
+										<Button variant="outline" className="w-full" onClick={handleSignOut}>
 											<IconLogout className="mr-2 h-4 w-4" />
 											Sair
 										</Button>

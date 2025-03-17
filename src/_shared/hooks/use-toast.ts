@@ -5,13 +5,7 @@ type ToastProps = {
 	description?: React.ReactNode;
 	variant?: "default" | "destructive";
 	duration?: number;
-	position?:
-		| "top-left"
-		| "top-right"
-		| "bottom-left"
-		| "bottom-right"
-		| "top-center"
-		| "bottom-center";
+	position?: "top-left" | "top-right" | "bottom-left" | "bottom-right" | "top-center" | "bottom-center";
 	onDismiss?: () => void;
 	onAutoClose?: () => void;
 	className?: string;

@@ -42,14 +42,10 @@ apiInstance.interceptors.response.use(
 				switch (status) {
 					case 401:
 						localStorage.removeItem("authToken");
-						throw new Error(
-							"Sessão expirada. Por favor, faça login novamente.",
-						);
+						throw new Error("Sessão expirada. Por favor, faça login novamente.");
 
 					case 403:
-						throw new Error(
-							"Acesso negado. Você não tem permissão para acessar este recurso.",
-						);
+						throw new Error("Acesso negado. Você não tem permissão para acessar este recurso.");
 
 					case 404:
 						throw new Error("Recurso não encontrado");
@@ -57,24 +53,19 @@ apiInstance.interceptors.response.use(
 					case 400:
 					case 422: {
 						const errorMessage =
-							(error.response.data as { message?: string })?.message ||
-							"Dados inválidos fornecidos.";
+							(error.response.data as { message?: string })?.message || "Dados inválidos fornecidos.";
 						throw new Error(errorMessage);
 					}
 
 					default:
 						if (status >= 500) {
-							throw new Error(
-								"Erro no servidor. Por favor, tente novamente mais tarde.",
-							);
+							throw new Error("Erro no servidor. Por favor, tente novamente mais tarde.");
 						}
 				}
 			} else if (error.request) {
 				throw new Error("Erro de rede. Verifique sua conexão com a internet.");
 			} else if (error.code === "ECONNABORTED") {
-				throw new Error(
-					"A requisição excedeu o tempo limite. Tente novamente.",
-				);
+				throw new Error("A requisição excedeu o tempo limite. Tente novamente.");
 			} else {
 				throw new Error(`Erro desconhecido: ${error.message}`);
 			}
