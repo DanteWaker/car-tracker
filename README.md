@@ -45,3 +45,5 @@ yarn start
 pnpm build
 pnpm start
 ```
+
+O projeto estará disponível em `http://localhost:3000`
