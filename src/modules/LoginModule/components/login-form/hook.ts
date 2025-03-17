@@ -13,12 +13,12 @@ export function useLoginForm() {
 	const form = useForm({
 		resolver: zodResolver(loginSchema),
 		defaultValues: {
-			email: "",
+			username: "",
 			password: "",
 		},
 	});
 
-	const onSubmit = async (data: { email: string; password: string }) => {
+	const onSubmit = async (data: { username: string; password: string }) => {
 		try {
 			setIsLoading(true);
 			await handleLogin(data);
@@ -29,7 +29,7 @@ export function useLoginForm() {
 		} catch (error) {
 			toast({
 				title: "Login failed",
-				description: "Invalid email or password.",
+				description: "Invalid username or password.",
 				variant: "destructive",
 			});
 		} finally {

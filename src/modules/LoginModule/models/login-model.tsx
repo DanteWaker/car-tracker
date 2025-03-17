@@ -2,19 +2,30 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export interface LoginCredentials {
-	email: string;
+	username: string;
 	password: string;
 }
 
 export function useLoginModel() {
-	const login = async (email: string, password: string): Promise<void> => {
-		console.log("login", email, password);
-		signIn("credentials", {
-			email,
-			password,
-			redirect: false,
-			callbackUrl: "/",
-		});
+	const login = async (username: string, password: string): Promise<void> => {
+		try {
+			const result = await signIn("credentials", {
+				username,
+				password,
+				redirect: false,
+				callbackUrl: "/",
+			});
+
+			console.log("Resultado do login:", result);
+
+			if (result?.error) {
+				console.error("Erro na autenticação:", result.error);
+				throw new Error(result.error);
+			}
+		} catch (error) {
+			console.error("Falha ao fazer login:", error);
+			throw error;
+		}
 	};
 
 	return {

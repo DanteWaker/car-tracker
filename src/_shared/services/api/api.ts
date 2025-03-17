@@ -1,4 +1,5 @@
 import axios, { type AxiosError } from "axios";
+import { cookies } from "next/headers";
 
 const apiInstance = axios.create({
 	baseURL: "/api",
@@ -10,10 +11,6 @@ const apiInstance = axios.create({
 
 apiInstance.interceptors.request.use(
 	(config) => {
-		const token = localStorage.getItem("authToken");
-		if (token) {
-			config.headers.Authorization = `Bearer ${token}`;
-		}
 		return config;
 	},
 	(error) => {
@@ -41,33 +38,31 @@ apiInstance.interceptors.response.use(
 
 				switch (status) {
 					case 401:
-						localStorage.removeItem("authToken");
-						throw new Error("Sessão expirada. Por favor, faça login novamente.");
+						throw new Error("Unauthorized");
 
 					case 403:
-						throw new Error("Acesso negado. Você não tem permissão para acessar este recurso.");
+						throw new Error("Forbidden");
 
 					case 404:
-						throw new Error("Recurso não encontrado");
+						throw new Error("Not Found");
 
 					case 400:
 					case 422: {
-						const errorMessage =
-							(error.response.data as { message?: string })?.message || "Dados inválidos fornecidos.";
+						const errorMessage = (error.response.data as { message?: string })?.message || "Invalid data provided.";
 						throw new Error(errorMessage);
 					}
 
 					default:
 						if (status >= 500) {
-							throw new Error("Erro no servidor. Por favor, tente novamente mais tarde.");
+							throw new Error("Internal Server Error");
 						}
 				}
 			} else if (error.request) {
-				throw new Error("Erro de rede. Verifique sua conexão com a internet.");
+				throw new Error("Network Error");
 			} else if (error.code === "ECONNABORTED") {
-				throw new Error("A requisição excedeu o tempo limite. Tente novamente.");
+				throw new Error("Request timeout");
 			} else {
-				throw new Error(`Erro desconhecido: ${error.message}`);
+				throw new Error(`Unknown error: ${error.message}`);
 			}
 		} catch (e) {
 			return Promise.reject(e);

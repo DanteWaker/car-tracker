@@ -3,7 +3,6 @@
 import { Avatar, AvatarFallback } from "@/_shared/components/ui/avatar";
 import { Button } from "@/_shared/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/_shared/components/ui/sheet";
-import { useAuthStore } from "@/_shared/stores/auth.store";
 import { IconDashboard, IconLogout, IconMenu2 } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -21,29 +20,7 @@ export function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(true);
 	const pathname = usePathname();
-	const { user, signOut } = useAuthStore();
 	const router = useRouter();
-	// Obter as iniciais do nome do usuário para o avatar
-	const getUserInitials = () => {
-		if (!user?.email) return "U";
-		return user.email.charAt(0).toUpperCase();
-	};
-
-	// Obter o nome de exibição do usuário
-	const getDisplayName = () => {
-		if (user?.user_metadata?.name) return user.user_metadata.name;
-		if (user?.email) {
-			// Retorna a parte antes do @ no email
-			return user.email.split("@")[0];
-		}
-		return "Usuário";
-	};
-
-	const handleSignOut = async () => {
-		await signOut();
-		router.push("/login");
-		setIsOpen(false);
-	};
 
 	const toggleDesktopMenu = () => {
 		setIsDesktopMenuOpen(!isDesktopMenuOpen);
@@ -84,32 +61,6 @@ export function Navbar() {
 						</Link>
 					))}
 				</div>
-
-				<div className="p-4 border-t">
-					{isDesktopMenuOpen ? (
-						<div className="flex items-center space-x-3">
-							<Avatar className="h-8 w-8">
-								<AvatarFallback>{getUserInitials()}</AvatarFallback>
-							</Avatar>
-							<div className="flex-1 min-w-0">
-								<div className="text-sm font-medium truncate">{getDisplayName()}</div>
-								<div className="text-xs text-muted-foreground truncate">{user?.email}</div>
-							</div>
-							<Button variant="ghost" size="icon" onClick={handleSignOut}>
-								<IconLogout className="h-5 w-5" />
-							</Button>
-						</div>
-					) : (
-						<div className="flex flex-col items-center space-y-3">
-							<Avatar className="h-8 w-8">
-								<AvatarFallback>{getUserInitials()}</AvatarFallback>
-							</Avatar>
-							<Button variant="ghost" size="icon" onClick={handleSignOut}>
-								<IconLogout className="h-5 w-5" />
-							</Button>
-						</div>
-					)}
-				</div>
 			</div>
 
 			{/* Conteúdo principal */}
@@ -135,17 +86,6 @@ export function Navbar() {
 										<SheetTitle>Menu</SheetTitle>
 									</SheetHeader>
 
-									{/* Informações do usuário para mobile */}
-									<div className="flex items-center space-x-3 mb-6 pb-6 border-b">
-										<Avatar className="h-10 w-10">
-											<AvatarFallback>{getUserInitials()}</AvatarFallback>
-										</Avatar>
-										<div>
-											<div className="font-medium">{getDisplayName()}</div>
-											<div className="text-sm text-muted-foreground truncate max-w-[180px]">{user?.email}</div>
-										</div>
-									</div>
-
 									{/* Links de navegação para mobile */}
 									<div className="flex flex-col space-y-3 py-4">
 										{routes.map((route) => (
@@ -163,14 +103,6 @@ export function Navbar() {
 												<span className="ml-3">{route.name}</span>
 											</Link>
 										))}
-									</div>
-
-									{/* Botão de sair para mobile */}
-									<div className="mt-auto pt-6 border-t">
-										<Button variant="outline" className="w-full" onClick={handleSignOut}>
-											<IconLogout className="mr-2 h-4 w-4" />
-											Sair
-										</Button>
 									</div>
 								</SheetContent>
 							</Sheet>

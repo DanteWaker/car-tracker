@@ -14,12 +14,12 @@ export function LoginForm() {
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 				<FormField
 					control={form.control}
-					name="email"
+					name="username"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Email</FormLabel>
+							<FormLabel>username</FormLabel>
 							<FormControl>
-								<Input placeholder="Enter your email" type="email" {...field} />
+								<Input placeholder="Enter your username" type="text" {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>

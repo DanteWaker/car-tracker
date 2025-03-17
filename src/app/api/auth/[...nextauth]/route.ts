@@ -1,5 +1,8 @@
+import { API_ROUTES } from "@/_shared/constants/api-routes";
+import { httpProvider } from "@/_shared/services/infrastructure/providers/http-provider";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { cookies } from "next/headers";
 
 const handler = NextAuth({
 	pages: {
@@ -7,23 +10,35 @@ const handler = NextAuth({
 	},
 	providers: [
 		CredentialsProvider({
-			name: "Credentials",
+			name: "credentials",
 			credentials: {
-				username: { label: "Username", type: "text", placeholder: "jsmith" },
+				username: { label: "Username", type: "text" },
 				password: { label: "Password", type: "password" },
 			},
-			async authorize(credentials, req) {
-				console.log("credentials", credentials);
-				console.log("req", req);
-
-				if (credentials?.username === "admin" && credentials?.password === "admin") {
-					return {
-						id: "1",
-						name: "Admin",
-						email: "admin@admin.com",
-					};
+			async authorize(credentials) {
+				if (!credentials?.username || !credentials?.password) {
+					throw new Error("Invalid credentials");
 				}
-				return null;
+
+				const response = await httpProvider.post<
+					{ refresh: string; access: string },
+					{ username: string; password: string }
+				>({
+					endpoint: `${process.env.BASE_URL}${API_ROUTES.AUTH.BASE}`,
+					body: {
+						username: credentials?.username,
+						password: credentials?.password,
+					},
+				});
+
+				(await cookies()).set("accessToken", response.access);
+				(await cookies()).set("refreshToken", response.refresh);
+
+				return {
+					id: credentials.username,
+					name: credentials.username,
+					email: credentials.username,
+				};
 			},
 		}),
 	],
